@@ -12,6 +12,7 @@ library;
 import 'dart:core';
 import 'dart:math' as math;
 import 'dart:ui'
+    as ui
     show
         CheckedState,
         Locale,
@@ -20,6 +21,7 @@ import 'dart:ui'
         SemanticsAction,
         SemanticsFlag,
         SemanticsFlags,
+        SemanticsHitTestBehavior,
         SemanticsInputType,
         SemanticsRole,
         SemanticsUpdate,
@@ -980,6 +982,7 @@ class SemanticsData with Diagnosticable {
     required this.role,
     required this.controlsNodes,
     required this.validationResult,
+    required this.hitTestBehavior,
     required this.inputType,
     required this.locale,
     this.tags,
@@ -1247,6 +1250,9 @@ class SemanticsData with Diagnosticable {
 
   /// {@macro flutter.semantics.SemanticsProperties.validationResult}
   final SemanticsValidationResult validationResult;
+
+  /// {@macro flutter.semantics.SemanticsProperties.hitTestBehavior}
+  final ui.SemanticsHitTestBehavior hitTestBehavior;
 
   /// {@macro flutter.semantics.SemanticsNode.inputType}
   final SemanticsInputType inputType;
@@ -1570,6 +1576,7 @@ class SemanticsProperties extends DiagnosticableTree {
     this.controlsNodes,
     this.inputType,
     this.validationResult = SemanticsValidationResult.none,
+    this.hitTestBehavior,
     this.onTap,
     this.onLongPress,
     this.onScrollLeft,
@@ -2507,6 +2514,13 @@ class SemanticsProperties extends DiagnosticableTree {
   /// {@endtemplate}
   final SemanticsValidationResult validationResult;
 
+  /// {@template flutter.semantics.SemanticsProperties.hitTestBehavior}
+  /// Describes how the semantic node should behave during hit testing.
+  ///
+  /// See [ui.SemanticsHitTestBehavior] for more details.
+  /// {@endtemplate}
+  final ui.SemanticsHitTestBehavior? hitTestBehavior;
+
   /// {@template flutter.semantics.SemanticsProperties.inputType}
   /// The input type for of a editable widget.
   ///
@@ -3179,7 +3193,8 @@ class SemanticsNode with DiagnosticableTreeMixin {
         _headingLevel != config._headingLevel ||
         _linkUrl != config._linkUrl ||
         _role != config.role ||
-        _validationResult != config.validationResult;
+        _validationResult != config.validationResult ||
+        _hitTestBehavior != config.hitTestBehavior;
   }
 
   // TAGS, LABELS, ACTIONS
@@ -3473,6 +3488,10 @@ class SemanticsNode with DiagnosticableTreeMixin {
   SemanticsValidationResult get validationResult => _validationResult;
   SemanticsValidationResult _validationResult = _kEmptyConfig.validationResult;
 
+  /// {@macro flutter.semantics.SemanticsProperties.hitTestBehavior}
+  ui.SemanticsHitTestBehavior get hitTestBehavior => _hitTestBehavior;
+  ui.SemanticsHitTestBehavior _hitTestBehavior = ui.SemanticsHitTestBehavior.defer;
+
   /// {@template flutter.semantics.SemanticsNode.inputType}
   /// The input type for of a editable node.
   ///
@@ -3553,6 +3572,7 @@ class SemanticsNode with DiagnosticableTreeMixin {
     _role = config._role;
     _controlsNodes = config._controlsNodes;
     _validationResult = config._validationResult;
+    _hitTestBehavior = config._hitTestBehavior;
     _inputType = config._inputType;
     _locale = config.locale;
 
@@ -3607,6 +3627,7 @@ class SemanticsNode with DiagnosticableTreeMixin {
     SemanticsRole role = _role;
     Set<String>? controlsNodes = _controlsNodes;
     SemanticsValidationResult validationResult = _validationResult;
+    ui.SemanticsHitTestBehavior hitTestBehavior = _hitTestBehavior;
     SemanticsInputType inputType = _inputType;
     final Locale? locale = _locale;
     final Set<int> customSemanticsActionIds = <int>{};
@@ -3762,6 +3783,7 @@ class SemanticsNode with DiagnosticableTreeMixin {
       role: role,
       controlsNodes: controlsNodes,
       validationResult: validationResult,
+      hitTestBehavior: hitTestBehavior,
       inputType: inputType,
       locale: locale,
     );
@@ -3953,6 +3975,7 @@ class SemanticsNode with DiagnosticableTreeMixin {
       role: data.role,
       controlsNodes: data.controlsNodes?.toList(),
       validationResult: data.validationResult,
+      hitTestBehavior: data.hitTestBehavior,
       inputType: data.inputType,
       locale: data.locale,
     );
@@ -6335,6 +6358,14 @@ class SemanticsConfiguration {
   SemanticsValidationResult _validationResult = SemanticsValidationResult.none;
   set validationResult(SemanticsValidationResult value) {
     _validationResult = value;
+    _hasBeenAnnotated = true;
+  }
+
+  /// {@macro flutter.semantics.SemanticsProperties.hitTestBehavior}
+  ui.SemanticsHitTestBehavior get hitTestBehavior => _hitTestBehavior;
+  ui.SemanticsHitTestBehavior _hitTestBehavior = ui.SemanticsHitTestBehavior.defer;
+  set hitTestBehavior(ui.SemanticsHitTestBehavior value) {
+    _hitTestBehavior = value;
     _hasBeenAnnotated = true;
   }
 
