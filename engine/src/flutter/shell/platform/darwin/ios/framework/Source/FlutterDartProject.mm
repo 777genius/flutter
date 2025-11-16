@@ -166,7 +166,10 @@ flutter::Settings FLTDefaultSettingsForBundle(NSBundle* bundle, NSProcessInfo* p
   // Removes unused function warning.
   (void)DoesHardwareSupportWideGamut;
 #else
-  NSNumber* nsEnableWideGamut = [mainBundle objectForInfoDictionaryKey:@"FLTEnableWideGamut"];
+  NSNumber* nsEnableWideGamut = [bundle objectForInfoDictionaryKey:@"FLTEnableWideGamut"];
+  if (nsEnableWideGamut == nil) {
+    nsEnableWideGamut = [mainBundle objectForInfoDictionaryKey:@"FLTEnableWideGamut"];
+  }
   BOOL enableWideGamut =
       (nsEnableWideGamut ? nsEnableWideGamut.boolValue : YES) && DoesHardwareSupportWideGamut();
   settings.enable_wide_gamut = enableWideGamut;
