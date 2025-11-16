@@ -115,7 +115,7 @@ final class _LinearTextScaler implements TextScaler {
 }
 
 final class _ClampedTextScaler implements TextScaler {
-  const _ClampedTextScaler(this.scaler, this.minScale, this.maxScale) : assert(maxScale > minScale);
+  const _ClampedTextScaler(this.scaler, this.minScale, this.maxScale) : assert(maxScale >= minScale);
   final TextScaler scaler;
   final double minScale;
   final double maxScale;
