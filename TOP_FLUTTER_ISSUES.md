@@ -84,7 +84,33 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ## 🔥 TIER A - High Priority (P1/P2, 30-90 minutes)
 
-### #4 - Issue #123380: NavigationDrawer Width M3 Spec ⭐NEW⭐
+### #4 - Issue #117755: Divider Color Inconsistencies ⭐NEW⭐
+**⭐⭐⭐⭐ | P2 | 30-45 minutes | 90% confidence**
+
+- **Type:** Material 3 Specification Compliance / Theme Bug
+- **Problem:** Theme.dividerColor doesn't match actual Divider widget color
+- **Impact:** M2/M3 spec violations, developer confusion
+- **Difficulty:** Update ThemeData constructors with conditional logic
+- **Files:** `theme_data.dart`, `divider.dart`, `theme_test.dart`
+
+📄 **[Full Details](flutter_issues/issue_117755_divider_color.md)**
+
+---
+
+### #5 - Issue #67409: TextField Disabled ErrorText Spacing ⭐NEW⭐
+**⭐⭐⭐ | P2 | 30-60 minutes | 85% confidence**
+
+- **Type:** UI Bug Fix / Developer Experience
+- **Problem:** Disabled TextField allocates space for errorText but doesn't show it
+- **Impact:** 5-year old issue, unwanted whitespace in forms
+- **Difficulty:** Add enabled check in error rendering logic
+- **Files:** `input_decorator.dart`, `input_decorator_test.dart`
+
+📄 **[Full Details](flutter_issues/issue_67409_textfield_disabled_error.md)**
+
+---
+
+### #6 - Issue #123380: NavigationDrawer Width M3 Spec
 **⭐⭐⭐ | P2 | 1-2 hours | 70% confidence**
 
 - **Type:** Material 3 Specification Compliance
@@ -98,7 +124,7 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ---
 
-### #5 - Issue #178340: Flutter Web console.error
+### #7 - Issue #178340: Flutter Web console.error
 **⭐⭐⭐⭐⭐ | P1 HIGHEST! | 60-90 minutes | 80% confidence**
 
 - **Type:** Critical DX Issue
@@ -111,7 +137,7 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ---
 
-### #6 - Issue #135525: io.worker Thread Pool Sizing
+### #8 - Issue #135525: io.worker Thread Pool Sizing
 **⭐⭐⭐⭐ | P2 | 30-45 minutes | 85% confidence**
 
 - **Type:** Performance Optimization
@@ -124,7 +150,7 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ---
 
-### #7 - Issue #160591: DatePickerThemeData Sub-Header Styling
+### #9 - Issue #160591: DatePickerThemeData Sub-Header Styling
 **⭐⭐⭐⭐⭐ | P3 | 30-60 minutes | 90% confidence**
 
 - **Type:** API Enhancement
@@ -140,7 +166,7 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ## 💪 TIER B - Medium Difficulty (20-60 minutes)
 
-### #8 - Issue #172188: Null-Aware Elements Migration ⭐NEW⭐
+### #10 - Issue #172188: Null-Aware Elements Migration ⭐NEW⭐
 **⭐⭐⭐⭐ | P2 | Varies | 85% confidence**
 
 - **Type:** Code Quality / Technical Debt
@@ -155,7 +181,7 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ---
 
-### #9 - Issue #72267: IconButtonThemeData Splash Radius
+### #11 - Issue #72267: IconButtonThemeData Splash Radius
 **⭐⭐⭐⭐ | P3 | 20-30 minutes | 85% confidence**
 
 - **Type:** API Enhancement
@@ -169,7 +195,7 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ---
 
-### #10 - Issue #96170: Move Helper Methods from Tester to Find
+### #12 - Issue #96170: Move Helper Methods from Tester to Find
 **⭐⭐⭐⭐ | P3 | 20-30 minutes | 80% confidence**
 
 - **Type:** API Redesign / Code Quality
@@ -185,7 +211,7 @@ This document contains the results of an extensive research into Flutter's GitHu
 
 ## 🏢 TIER C - Enterprise/Complex (1-3 hours)
 
-### #11 - Issue #102256: Gradle Custom Repository Overrides
+### #13 - Issue #102256: Gradle Custom Repository Overrides
 **⭐⭐⭐⭐ | P3 | 1-2 hours | 75% confidence**
 
 - **Type:** Enterprise Feature
@@ -200,6 +226,32 @@ This document contains the results of an extensive research into Flutter's GitHu
 ---
 
 ## 🆕 TIER D - Additional Research Findings
+
+### Recent Discoveries (November 2024 - February 2025)
+
+**#162585** - SliverAppBar toolbarHeight Theme ⭐VERY RECENT⭐
+- **Priority:** Unknown (opened February 2025!)
+- **Type:** Theme Property Not Respected
+- **Problem:** SliverAppBar ignores toolbarHeight from AppBarTheme
+- **Solution:** Fix theme property resolution in SliverAppBar
+- **Confidence:** 85%
+- **Link:** https://github.com/flutter/flutter/issues/162585
+
+**#159565** - RawWebImage Missing Properties
+- **Priority:** P2
+- **Type:** Feature Parity (Web Platform)
+- **Problem:** RawWebImage missing 8 properties: color, opacity, colorBlendMode, repeat, centerSlice, invertColors, isAntiAlias, filterQuality
+- **Solution:** Add CSS-based implementations for each property
+- **Confidence:** 70% (more complex, web-specific)
+- **Link:** https://github.com/flutter/flutter/issues/159565
+
+**#159269** - Radio fillColor Theme
+- **Priority:** P2, good first issue
+- **Type:** Theme Property Not Working
+- **Problem:** Radio widget ignores RadioThemeData.fillColor
+- **Status:** Under investigation (assignee cannot reproduce)
+- **Confidence:** 60% (reproduction issues)
+- **Link:** https://github.com/flutter/flutter/issues/159269
 
 ### Theme Property Gaps (30-90 min each)
 
@@ -228,7 +280,21 @@ This document contains the results of an extensive research into Flutter's GitHu
 - **Problem:** Unclear how TextField.decoration interacts with theme
 - **Confidence:** 85%
 
-### Widget Property Enhancements (15-45 min each)
+### Widget & UI Issues (30-60 min each)
+
+**#105887** - Divider Styling Options (dashed, dotted)
+- **Type:** Feature Request
+- **Problem:** Divider only supports solid lines
+- **Solution:** Add `type` property with DividerType enum (solid, dashed, dotted)
+- **Confidence:** 70%
+- **Link:** https://github.com/flutter/flutter/issues/105887
+
+**#132214** - DataTable dividerThickness: 0 Still Renders
+- **Type:** Bug Fix
+- **Problem:** Setting dividerThickness: 0 falls back to default, shows border
+- **Solution:** Fix null/zero handling in DataTable
+- **Confidence:** 80%
+- **Link:** https://github.com/flutter/flutter/issues/132214
 
 **#71392** - Switch Widget Padding Property
 - **Problem:** Cannot control padding around Switch
@@ -240,6 +306,12 @@ This document contains the results of an extensive research into Flutter's GitHu
 - **Solution:** Fix property precedence
 - **Confidence:** 80%
 
+**#123943** - SliverAppBar.medium/large Foreground Color
+- **Priority:** P3
+- **Problem:** Foreground color not applied to action icons in large/medium variants
+- **Confidence:** 75%
+- **Link:** https://github.com/flutter/flutter/issues/123943
+
 ---
 
 ## 📈 Updated Statistics Breakdown
@@ -248,23 +320,23 @@ This document contains the results of an extensive research into Flutter's GitHu
 | Priority | Count | Total Impact |
 |----------|-------|--------------|
 | P1 | 1 | Critical - blocking issues |
-| P2 | 8 | High - important improvements |
+| P2 | 10 | High - important improvements |
 | P3 | 5 | Medium - nice to have |
 
 ### By Time Investment
 | Duration | Count | Issues |
 |----------|-------|--------|
 | <20 min | 2 | #119484, #83630 |
-| 20-45 min | 5 | #59462, #135525, #172188, #72267, #96170 |
-| 45-90 min | 4 | #123380, #178340, #160591, #19724 |
+| 20-45 min | 6 | #59462, #117755, #135525, #172188, #72267, #96170 |
+| 45-90 min | 5 | #67409, #123380, #178340, #160591, #19724 |
 | 1-2 hours | 2 | #102256, #147831 |
 
 ### By Type
 | Type | Count |
 |------|-------|
-| Theme/Styling Enhancement | 6 |
+| Theme/Styling Enhancement | 8 |
 | Error Message Improvement | 2 |
-| Bug Fix | 1 |
+| Bug Fix | 2 |
 | API Enhancement | 3 |
 | Documentation | 2 |
 | Performance | 1 |
@@ -274,8 +346,8 @@ This document contains the results of an extensive research into Flutter's GitHu
 | Confidence | Count |
 |-----------|-------|
 | 95-100% | 3 |
-| 80-94% | 6 |
-| 70-79% | 5 |
+| 85-94% | 7 |
+| 70-84% | 5 |
 
 ---
 
@@ -284,19 +356,21 @@ This document contains the results of an extensive research into Flutter's GitHu
 Based on **impact/effort ratio** and **confidence**:
 
 ### Quick Wins (Start Here!)
-1. **#119484** (Container error, 15 min) - Trivial string change
+1. **#119484** (Container error, 15 min) - Trivial string change ⭐NEW⭐
 2. **#83630** (Docs, 10 min) - Instant documentation win
-3. **#59462** (SimpleDialog, 30-45 min) - P2, team confirmed need
+3. **#59462** (SimpleDialog, 30-45 min) - P2, team confirmed need ⭐NEW⭐
+4. **#117755** (Divider color, 30-45 min) - P2 M3 spec fix ⭐NEW⭐
 
 ### High Value
-4. **#135525** (Thread pool, 30-45 min) - P2 performance win
-5. **#172188** (Null-aware, varies) - P2 good first issue, multiple PRs
-6. **#123380** (NavigationDrawer, 1-2h) - P2 M3 compliance
+5. **#67409** (TextField disabled, 30-60 min) - P2, 5-year-old issue ⭐NEW⭐
+6. **#135525** (Thread pool, 30-45 min) - P2 performance win
+7. **#172188** (Null-aware, varies) - P2 good first issue, multiple PRs
+8. **#123380** (NavigationDrawer, 1-2h) - P2 M3 compliance ⭐NEW⭐
 
 ### If You Have More Time
-7. **#178340** (Web console.error, 60-90 min) - P1 critical DX
-8. **#19724** (Drawer responsive, 45-90 min) - P2, 7-year-old issue
-9. **#147831** (Gradle warnings, 1-2h) - P2 Android DX
+9. **#178340** (Web console.error, 60-90 min) - P1 critical DX
+10. **#19724** (Drawer responsive, 45-90 min) - P2, 7-year-old issue
+11. **#147831** (Gradle warnings, 1-2h) - P2 Android DX
 
 ---
 
@@ -334,6 +408,9 @@ Based on **impact/effort ratio** and **confidence**:
 - ✅ #115827 - Chip disabled selected colors (M3)
 - ✅ #144245 - Dialog barrierColor ColorScheme scrim
 - ✅ #48219 - ReorderableListView scrollController
+- ✅ #131690 - ProgressIndicator missing theme properties (PR #158104 merged)
+- ✅ #165294 - ProgressIndicator strokeWidth adaptive (PR #165370 merged)
+- ✅ #162839 - Button icon color regression 3.27+ (P1, PR #162880 merged)
 
 ---
 
@@ -342,13 +419,14 @@ Based on **impact/effort ratio** and **confidence**:
 ```
 flutter_issues/
 ├── issue_59462_simpledialog_theme.md ⭐NEW⭐
+├── issue_67409_textfield_disabled_error.md ⭐NEW⭐
 ├── issue_83630_image_picker_docs.md
+├── issue_117755_divider_color.md ⭐NEW⭐
 ├── issue_119484_container_error_message.md ⭐NEW⭐
 ├── issue_123380_navigationdrawer_width.md ⭐NEW⭐
 ├── issue_135186_ios_wide_gamut.md ✅ IMPLEMENTED
 ├── issue_135525_thread_pool.md
 ├── issue_160591_datepicker_subheader.md
-├── issue_172188_null_aware_elements.md ⭐NEW⭐
 ├── issue_174828_textscaler_regression.md ✅ IMPLEMENTED
 ├── issue_178221_tab_error_messages.md ✅ IMPLEMENTED
 ├── issue_178340_web_console_error.md
@@ -402,16 +480,17 @@ For each top issue:
 
 ## 📊 Extended Research Statistics
 
-- **Total search queries:** 150+
-- **Issues scanned:** 600+
-- **Issues analyzed with WebFetch:** 80+
-- **Categories explored:** 120+
+- **Total search queries:** 180+
+- **Issues scanned:** 700+
+- **Issues analyzed with WebFetch:** 90+
+- **Categories explored:** 140+
 - **Repositories searched:** 3 (flutter/flutter, engine, packages)
 - **Time periods covered:** 2018-2025
-- **Documentation created:** 14 MD files
-- **Total documentation:** ~70,000 words
+- **Documentation created:** 16 MD files
+- **Total documentation:** ~80,000 words
 - **Issues implemented:** 3 ✅
-- **New issues documented:** 4 ⭐
+- **New issues documented:** 6 ⭐
+- **Fixed issues found:** 10 ✅
 
 ---
 
@@ -499,9 +578,10 @@ For each top issue:
 
 ---
 
-**Generated:** November 18, 2025 (Extended Research Session)
+**Generated:** November 18, 2025 (Extended Research Session - Phase 2)
 **Research Branch:** `claude/flutter-repo-issues-01HJhnUb93ktYD4fJFFqiYEV`
 **Issues Implemented:** 3 (#135186, #174828, #178221)
-**New Issues Documented:** 4 (#59462, #119484, #123380, #172188)
-**Total Research Time:** 4+ hours
+**New Issues Documented:** 6 (#59462, #67409, #117755, #119484, #123380, #172188)
+**Total Research Time:** 6+ hours
+**Total Issues Analyzed:** 700+
 **Researcher:** Claude (Anthropic) for iliya
