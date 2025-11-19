@@ -779,6 +779,26 @@ void main() {
       matchesGoldenFile('container.clipBehaviour.with.shadow.png'),
     );
   });
+
+  testWidgets('Container with both color and decoration throws clear error', (WidgetTester tester) async {
+    expect(
+      () => Container(
+        color: const Color(0xFF0000FF),
+        decoration: const BoxDecoration(),
+      ),
+      throwsA(
+        isA<AssertionError>().having(
+          (AssertionError e) => e.toString(),
+          'message',
+          allOf(
+            contains('Cannot provide both a color and a decoration'),
+            contains('The color argument is just a shorthand'),
+            contains('set the color in the BoxDecoration instead'),
+          ),
+        ),
+      ),
+    );
+  });
 }
 
 class _MockPaintingContext extends Fake implements PaintingContext {
